@@ -2,6 +2,7 @@ package kh.my.board.board.model.service;
 
 import static kh.my.board.comm.JDBCTemplate.*;
 
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -31,31 +32,9 @@ public class BoardService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		result = new BoardDao().getBoardCount(conn);
-		
+		JDBCTemplate.close(conn);
 		return result;
 	}
-	//create
-	public int insertBoard(Board vo) {
-		int result = -1;
-		Connection conn = JDBCTemplate.getConnection();
-		//여기에 넣는 경우 : DML 두개일 때
-		JDBCTemplate.setAutoCommit(conn, false);
-		//강사님은 이걸 더 선호
-		
-		result = new BoardDao().insertBoard(conn, vo);
-			
-		if(result > 0) {
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.Rollback(conn);
-		}
-		JDBCTemplate.Rollback(conn);
-		JDBCTemplate.close(conn);
-		return result;	
-	}
-	
-	
-	//read
 	public ArrayList<Board> selectBoard(int start , int end) {
 		ArrayList<Board> voList = null;
 		Connection conn = getConnection();
@@ -64,6 +43,32 @@ public class BoardService {
 		JDBCTemplate.close(conn);
 		return voList;
 	}
+	public ArrayList<Board> selectBoardList() {
+		ArrayList<Board> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		
+		volist = new BoardDao().selectBoardList(conn);
+		
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	//create
+	public int insertBoard(Board vo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		//여기에 넣는 경우 : DML 두개일 때
+		
+		//강사님은 이걸 더 선호
+		
+		result = new BoardDao().insertBoard(conn, vo);
+			
+		
+		JDBCTemplate.close(conn);
+		return result;	
+	}
+	
+	
+	//read
 	//update
 	public int updateBoard(Board vo, String writer) {
 		int result = -1;

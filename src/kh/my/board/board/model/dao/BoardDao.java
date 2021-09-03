@@ -1,7 +1,7 @@
 package kh.my.board.board.model.dao;
 
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -24,7 +24,17 @@ public class BoardDao {
 	
 	public Board getBoard(Connection conn, int bno) {
 		Board vo = null;
-		String query = "select bno,bref,bre_level,bre_step from board_r where bno = ?";
+		
+//		private String title;
+//		 private String content;
+//		 private Date createDate;
+//		 private String writer;
+//		 private char deleteYn;
+//		 private int bref;
+		
+		String query = "select bno,bref,bre_level,bre_step"
+				+ " ,title, content, create_Date, writer, delete_Yn "
+				+ " from board_r where bno = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -38,6 +48,11 @@ public class BoardDao {
 				vo.setBref(rs.getInt(2));
 				vo.setBreLevel(rs.getInt(3));
 				vo.setBreStep(rs.getInt(4));
+				vo.setTitle(rs.getString("title"));
+				vo.setContent(rs.getString("content"));
+				vo.setCreateDate(rs.getDate("create_Date"));
+				vo.setWriter(rs.getString("writer"));
+				vo.setDeleteYn(rs.getString("delete_Yn"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,9 +113,9 @@ public class BoardDao {
 				vo.setBno(rs.getInt("bno"));
 				vo.setTitle(rs.getString("title"));
 				vo.setContent(rs.getString("content"));
-				vo.setCreate_date(rs.getDate("create_date"));
+				vo.setCreateDate(rs.getDate("create_Date"));
 				vo.setWriter(rs.getString("writer"));
-				vo.setDelete_yn(rs.getString("delete_yn").charAt(0));
+				vo.setDeleteYn(rs.getString("delete_Yn"));
 				vo.setBref(rs.getInt("bref"));
 				vo.setBreLevel(rs.getInt("bre_level"));
 				vo.setBreStep(rs.getInt("bre_step"));
@@ -209,9 +224,9 @@ public class BoardDao {
 				vo.setBno(rs.getInt("bno"));
 				vo.setTitle(rs.getString("title"));
 				vo.setContent(rs.getString("content"));
-				vo.setCreate_date(rs.getDate("create_date"));
+				vo.setCreateDate(rs.getDate("create_Date"));
 				vo.setWriter(rs.getString("writer"));
-				vo.setDelete_yn(rs.getString("delete_yn").charAt(0));
+				vo.setDeleteYn(rs.getString("delete_Yn"));
 				vo.setBref(rs.getInt("bref"));
 				vo.setBreLevel(rs.getInt("bre_level"));
 				vo.setBreStep(rs.getInt("bre_step"));

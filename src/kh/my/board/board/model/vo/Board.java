@@ -23,7 +23,7 @@ public class Board {
 	 private String content;
 	 private Date createDate;
 	 private String writer;
-	 private char deleteYn;
+	 private String deleteYn;
 	 private int bref;  //진짜 원본 조상글
 	 private int breLevel;   //원본글 0, 답글 1, 답답글 2
 	 private int breStep;    //화면에 보여질 순서, 기준은 원본글 1, ...
@@ -88,17 +88,17 @@ public class Board {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public Date getCreate_date() {
+	public Date getCreateDate() {
 		return createDate;
 	}
-	public void setCreate_date(Date create_date) {
-		this.createDate = create_date;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public char getDelete_yn() {
+	public String getDelete_yn() {
 		return deleteYn;
 	}
-	public void setDelete_yn(char delete_yn) {
-		this.deleteYn = delete_yn;
+	public void setDeleteYn(String deleteYn) {
+		this.deleteYn = deleteYn;
 	}
 	public int getBref() {
 		return bref;

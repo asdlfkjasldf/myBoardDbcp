@@ -1,6 +1,7 @@
 package kh.my.board.board.controller;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -55,8 +56,8 @@ public class BoardReWriteServlet extends HttpServlet {
 		
 		//화면에 전달되어 옴
 		//http://localhost:8090/myBoard/boardwrite?t=title&c=content
-		String title = request.getParameter("t");
-		String content = request.getParameter("c");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
 		String writer = (String)request.getSession().getAttribute("memberLoginInfo");
 		if(writer == null) {
 			writer = "user01";  //TODO : 임시코드 user 실행
@@ -73,6 +74,8 @@ public class BoardReWriteServlet extends HttpServlet {
 			out.println("<br>게시글이 입력되었습니다.");
 		}
 		
+//		request.getRequestDispatcher("boardlist").forward(request, response);
+		response.sendRedirect("boardlist");
 		
 		
 		
